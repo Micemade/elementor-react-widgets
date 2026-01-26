@@ -1,26 +1,27 @@
 {
-    "name": "elementor-react-widgets",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "postbuild": "node scripts/extract-css.js",
-        "build:sourcemap": "cross-env VITE_SOURCEMAP=true vite build",
-        "preview": "vite preview"
-    },
-    "dependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
-    },
-    "devDependencies": {
-        "@vitejs/plugin-react": "^4.0.0",
-        "cross-env": "^10.1.0",
-        "eslint": "^8.57.1",
-        "eslint-config-prettier": "^8.10.2",
-        "eslint-plugin-react": "^7.37.5",
-        "prettier": "^3.8.1",
-        "sass-embedded": "^1.97.3",
-        "vite": "^5.0.0"
-    }
+	"name": "elementor-react-widgets",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"postbuild": "node scripts/extract-css.js",
+		"build:sourcemap": "cross-env VITE_SOURCEMAP=true vite build",
+		"preview": "vite preview",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-react": "^4.0.0",
+		"cross-env": "^10.1.0",
+		"eslint": "^8.57.1",
+		"eslint-config-prettier": "^8.10.2",
+		"eslint-plugin-react": "^7.37.5",
+		"prettier": "^3.8.1",
+		"sass-embedded": "^1.97.3",
+		"vite": "^5.0.0"
+	}
 }

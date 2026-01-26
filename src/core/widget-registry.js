@@ -10,10 +10,10 @@ import { mapHelloWidgetSettings } from '../widgets/settings-mappers';
 
 // Registry mapping widget types to their configurations
 export const WIDGET_REGISTRY = {
-    'hello-widget': {
-        component: HelloWidget,
-        settingsMapper: mapHelloWidgetSettings,
-    },
+	'hello-widget': {
+		component: HelloWidget,
+		settingsMapper: mapHelloWidgetSettings,
+	},
 };
 
 // Get list of all registered widget types
