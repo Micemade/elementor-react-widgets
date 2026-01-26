@@ -1,5 +1,5 @@
 ---
-applyTo: "**"
+applyTo: '**'
 ---
 
 # General WordPress coding instructions and preferences that AI should follow.

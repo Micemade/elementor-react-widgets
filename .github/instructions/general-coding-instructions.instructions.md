@@ -1,5 +1,5 @@
 ---
-applyTo: "**"
+applyTo: '**'
 ---
 
 # General coding instructions and preferences that AI should follow.
