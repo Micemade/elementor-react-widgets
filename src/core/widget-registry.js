@@ -1,19 +1,19 @@
 /**
  * Widget Registry
- * 
+ *
  * Central registry mapping widget names to their React components and settings mappers.
  * Add new widgets here to make them available throughout the system.
  */
 
-import HelloWidget from '../widgets/hello-widget/hello-widget';
-import { mapHelloWidgetSettings } from '../widgets/settings-mappers';
+import HelloWidget from "../widgets/hello-widget/hello-widget";
+import { mapHelloWidgetSettings } from "../widgets/settings-mappers";
 
 // Registry mapping widget types to their configurations
 export const WIDGET_REGISTRY = {
-	'hello-widget': {
-		component: HelloWidget,
-		settingsMapper: mapHelloWidgetSettings
-	}
+  "hello-widget": {
+    component: HelloWidget,
+    settingsMapper: mapHelloWidgetSettings,
+  },
 };
 
 // Get list of all registered widget types

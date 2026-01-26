@@ -1,6 +1,7 @@
 ---
 applyTo: "*.js, *.jsx, *.ts, *.tsx"
 ---
+
 ## General guidelines
 
 - Write modern ES6+ code following WordPress JS standards

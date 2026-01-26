@@ -1,6 +1,7 @@
 ---
-applyTo: '**'
+applyTo: "**"
 ---
+
 # General WordPress coding instructions and preferences that AI should follow.
 
 - Use WordPress coding standards and best practices.
@@ -11,6 +12,7 @@ applyTo: '**'
 - When working with SCSS, use latest SCSS coding standards and best practices.
 
 ## Reference repositories
+
 - https://developer.wordpress.org/coding-standards/wordpress-coding-standards/
 - https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
 - https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/

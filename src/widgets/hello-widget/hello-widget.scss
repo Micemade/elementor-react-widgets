@@ -1,2 +1,8 @@
-.hello-widget { padding: 10px; }
-.hello-widget__heading { color: var(--hello-heading-color, #222); font-size: var(--hello-heading-font-size, 24px); margin: 0; }
+.hello-widget {
+  padding: 10px;
+}
+.hello-widget__heading {
+  color: var(--hello-heading-color, #222);
+  font-size: var(--hello-heading-font-size, 24px);
+  margin: 0;
+}

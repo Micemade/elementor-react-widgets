@@ -1,6 +1,7 @@
 ---
-applyTo: '**'
+applyTo: "**"
 ---
+
 # General coding instructions and preferences that AI should follow.
 
 - When instructed to change the code, if not clear, ask for specifics.
