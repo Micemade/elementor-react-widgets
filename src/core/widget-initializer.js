@@ -1,5 +1,4 @@
 import widgetManager from './widget-manager';
-import { getWidgetConfig } from './widget-registry';
 
 /**
  * Create a widget initializer function for a given widget type.
