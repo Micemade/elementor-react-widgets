@@ -6,8 +6,8 @@ const outCssDir = path.resolve(__dirname, '../assets/css');
 const outCss = path.join(outCssDir, 'style.css');
 
 if (!fs.existsSync(assetsJs)) {
-  console.error('assets/js/main.js not found; build may have failed.');
-  process.exit(1);
+	console.error('assets/js/main.js not found; build may have failed.');
+	process.exit(1);
 }
 
 const js = fs.readFileSync(assetsJs, 'utf8');
@@ -16,8 +16,8 @@ const js = fs.readFileSync(assetsJs, 'utf8');
 const match = js.match(/\.textContent\s*=\s*`([\s\S]*?)`/);
 
 if (!match) {
-  console.warn('No inlined CSS found in main.js.');
-  process.exit(0);
+	console.warn('No inlined CSS found in main.js.');
+	process.exit(0);
 }
 
 const css = match[1];

@@ -1,0 +1,28 @@
+{
+  // Use tabs instead of spaces and fix tab width to 4
+  "editor.insertSpaces": false,
+  "editor.tabSize": 4,
+  "editor.detectIndentation": false,
+
+  // Ensure JSON and other files follow workspace indentation
+  "[json]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "[javascript]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "[javascriptreact]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "[typescript]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "[php]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  }
+}
