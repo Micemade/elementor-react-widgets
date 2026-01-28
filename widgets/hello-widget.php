@@ -93,6 +93,7 @@ class Elementor_Hello_Widget extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Heading Color', 'elementor-react-widgets' ),
 				'type'  => Controls_Manager::COLOR,
+				'default' => '#FF7070',
 			]
 		);
 
@@ -102,7 +103,7 @@ class Elementor_Hello_Widget extends \Elementor\Widget_Base {
 				'label'      => __( 'Heading Size', 'elementor-react-widgets' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
-				'range'      => [ 'px' => [ 'min' => 10, 'max' => 72 ] ],
+				'range'      => [ 'px' => [ 'min' => 18, 'max' => 120 ] ],
 				'default'    => [ 'size' => 24, 'unit' => 'px' ],
 			]
 		);

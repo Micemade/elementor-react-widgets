@@ -59,38 +59,14 @@ const HelloWidget = ({ widgetData = {}, widgetId = null }) => {
 
 			{isElementorEditor() && (
 				<div className="hello-widget__controls">
-					<label className="hello-widget__label">Title size</label>
-					<div className="hello-widget__controls-row">
-						<button
-							type="button"
-							className="hello-widget__btn"
-							onClick={() =>
-								onSizeChange(Math.max(8, localSize - 1))
-							}
-						>
-							−
-						</button>
-						<input
-							type="range"
-							min="8"
-							max="120"
-							value={localSize}
-							onChange={(e) =>
-								onSizeChange(Number(e.target.value))
-							}
-							className="hello-widget__range"
-						/>
-						<button
-							type="button"
-							className="hello-widget__btn"
-							onClick={() => onSizeChange(localSize + 1)}
-						>
-							+
-						</button>
-						<span className="hello-widget__size">
-							{localSize}px
-						</span>
-					</div>
+					<input
+						type="range"
+						min="8"
+						max="120"
+						value={localSize}
+						onChange={(e) => onSizeChange(Number(e.target.value))}
+						className="hello-widget__range"
+					/>
 				</div>
 			)}
 		</div>

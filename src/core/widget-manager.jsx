@@ -130,7 +130,13 @@ class WidgetManager {
 		const model = this.models[modelKey];
 		if (model && model.setSetting) {
 			model.setSetting(settingName, value);
+
+			// Mark document as changed to enable Update/Publish button
+			if (typeof elementor !== 'undefined' && elementor.saver) {
+				elementor.saver.setFlagEditorChange(true);
+			}
 		}
+		
 	}
 
 	/**
