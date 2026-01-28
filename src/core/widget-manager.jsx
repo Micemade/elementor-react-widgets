@@ -145,6 +145,17 @@ class WidgetManager {
 				if (typeof elementor !== 'undefined' && elementor.saver) {
 					elementor.saver.setFlagEditorChange(true);
 				}
+
+				// Ensure Elementor views listening on the parent model are notified
+				// so controls and the editor UI update accordingly.
+				if (model && typeof model.trigger === 'function') {
+					try {
+						model.trigger('change:settings', model, settingsModel);
+						model.trigger('change', model);
+					} catch (e) {
+						// ignore
+					}
+				}
 				return;
 			}
 		}
