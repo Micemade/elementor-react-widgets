@@ -129,40 +129,58 @@ class WidgetManager {
 	updateModelSetting(widgetType, widgetId, settingName, value) {
 		const modelKey = `${widgetType}_${widgetId}`;
 		const model = this.models[modelKey];
-		// Prefer updating the Elementor settings Backbone model directly so
-		// changes are recorded in Elementor history (undo/redo).
+		// Prefer Elementor's model API if available since it integrates with
+		// the editor history and internal change handling.
+		if (model && typeof model.setSetting === 'function') {
+			if (typeof settingName === 'object') {
+				// Batch updates: call setSetting for each key to ensure proper
+				// internal handling. Note: this may create multiple history
+				// entries depending on Elementor internals; consider batching
+				// at a higher level if needed.
+				Object.keys(settingName).forEach((k) => {
+					model.setSetting(k, settingName[k]);
+				});
+			} else {
+				model.setSetting(settingName, value);
+			}
+
+			// Mark the editor document as changed so Publish/Update is enabled
+			if (typeof elementor !== 'undefined' && elementor.saver) {
+				elementor.saver.setFlagEditorChange(true);
+			}
+
+			// Trigger change events so other listeners update immediately.
+			if (typeof model.trigger === 'function') {
+				try {
+					model.trigger('change');
+				} catch (e) {
+					// ignore
+				}
+			}
+			return;
+		}
+
+		// Fallback: update the Backbone settings model directly and notify.
 		if (model && typeof model.get === 'function') {
 			const settingsModel = model.get && model.get('settings');
 			if (settingsModel && typeof settingsModel.set === 'function') {
-				// Support object batch updates or single key/value
 				if (typeof settingName === 'object') {
 					settingsModel.set(settingName);
 				} else {
 					settingsModel.set(settingName, value);
 				}
 
-				// Mark the editor document as changed so Publish/Update is enabled
 				if (typeof elementor !== 'undefined' && elementor.saver) {
 					elementor.saver.setFlagEditorChange(true);
 				}
-
-				// Ensure Elementor views listening on the parent model are notified
-				// so controls and the editor UI update accordingly.
-				if (model && typeof model.trigger === 'function') {
+				if (typeof model.trigger === 'function') {
 					try {
 						model.trigger('change:settings', model, settingsModel);
 						model.trigger('change', model);
-					} catch (e) {
-						// ignore
-					}
+					} catch (e) {}
 				}
 				return;
 			}
-		}
-
-		// Fallback to the previous API if available
-		if (model && model.setSetting) {
-			model.setSetting(settingName, value);
 		}
 	}
 
