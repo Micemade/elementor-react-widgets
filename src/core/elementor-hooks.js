@@ -70,6 +70,9 @@ export const registerEditorHooks = () => {
 				const getSettingsFromModel = () =>
 					widgetConfig.settingsMapper(model);
 
+				console.log(getSettingsFromModel());
+
+
 				// Prevent the editor view from re-rendering the widget DOM.
 				// React will handle updates via state instead of letting Elementor replace the DOM.
 				if (view && typeof view.renderOnChange === 'function') {

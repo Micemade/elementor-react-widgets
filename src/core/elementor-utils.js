@@ -27,3 +27,17 @@ export const updateElementorSetting = (
 		);
 	}
 };
+
+/**
+ * Get current Elementor model for a widget
+ * 
+ * @param {string} widgetType - Widget type
+ * @param {string} widgetId - Widget ID
+ * @returns {Object|null} Elementor model or null
+ */
+export const getElementorModel = (widgetType, widgetId) => {
+	if (typeof window.ReactElementorWidgets === 'undefined') {
+		return null;
+	}
+	return window.ReactElementorWidgets.getModel(widgetType, widgetId);
+};
