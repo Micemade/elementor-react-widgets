@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { getWidgetConfig } from './widget-registry';
+import { log } from 'console';
 
 /**
  * WidgetManager
@@ -128,6 +129,27 @@ class WidgetManager {
 	updateModelSetting(widgetType, widgetId, settingName, value) {
 		const modelKey = `${widgetType}_${widgetId}`;
 		const model = this.models[modelKey];
+		// Prefer updating the Elementor settings Backbone model directly so
+		// changes are recorded in Elementor history (undo/redo).
+		if (model && typeof model.get === 'function') {
+			const settingsModel = model.get && model.get('settings');
+			if (settingsModel && typeof settingsModel.set === 'function') {
+				// Support object batch updates or single key/value
+				if (typeof settingName === 'object') {
+					settingsModel.set(settingName);
+				} else {
+					settingsModel.set(settingName, value);
+				}
+
+				// Mark the editor document as changed so Publish/Update is enabled
+				if (typeof elementor !== 'undefined' && elementor.saver) {
+					elementor.saver.setFlagEditorChange(true);
+				}
+				return;
+			}
+		}
+
+		// Fallback to the previous API if available
 		if (model && model.setSetting) {
 			model.setSetting(settingName, value);
 		}
@@ -148,6 +170,8 @@ class WidgetManager {
 
 // Create singleton instance
 const widgetManager = new WidgetManager();
+console.log(widgetManager);
+
 
 // Expose globally for React components to access
 window.ReactElementorWidgets = widgetManager;
