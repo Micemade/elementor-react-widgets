@@ -46,21 +46,6 @@ export const registerEditorHooks = () => {
 		return;
 	}
 
-	// Prevent Elementor from re-rendering widget DOM on every settings change
-	// React will handle updates internally without DOM replacement
-	elementor.hooks.addFilter(
-		'editor/widget/renderOnChange',
-		function (renderOnChange, widgetType) {
-			// For our registered widgets, allow renderOnChange to be called,
-			// but we'll override the view's renderOnChange to be conditional.
-			if (getRegisteredWidgets().includes(widgetType)) {
-				return renderOnChange;
-			}
-
-			return renderOnChange;
-		}
-	);
-
 	// Register panel open hooks for each widget type
 	getRegisteredWidgets().forEach((widgetType) => {
 		elementor.hooks.addAction(
@@ -81,7 +66,7 @@ export const registerEditorHooks = () => {
 						const widgetKeys = Object.keys(mapped);
 
 						// Override view.renderOnChange to be conditional:
-						// - For widget-owned changes, skip re-render (React handles it)
+						// - For widget-owned changes, false (React handles it)
 						// - For core/advanced changes, call the original renderOnChange
 						const originalRenderOnChange = view.renderOnChange.bind(view);
 						view.renderOnChange = (settings) => {

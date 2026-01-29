@@ -12,7 +12,7 @@ import widgetManager from './widget-manager';
  */
 export const createWidgetInitializer = (widgetType) => {
 	return ($scope) => {
-		// Widget-specific class names (e.g., .products-layout-wrapper)
+		// Widget-specific class names (e.g., .hello-widget-wrapper)
 		const wrapperClass = `.${widgetType}-wrapper`;
 		const rootClass = `.${widgetType}-react-root`;
 

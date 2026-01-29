@@ -11,7 +11,7 @@ Features:
 Quickstart:
 
 1. cd into this folder and run `npm install`.
-2. Run `npm run build` to produce `assets/` files, or `npm run dev` for local dev server.
+2. Run `npm run build` or `npm run watch` to produce `assets/` files, or `npm run dev` for local dev server.
 3. Activate the plugin in WordPress and add the "Hello (React) Widget" in Elementor.
 
 Sourcemaps:
