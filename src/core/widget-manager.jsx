@@ -18,6 +18,20 @@ class WidgetManager {
 
 		/** @type {Object<string,Object>} Elementor model references */
 		this.models = {};
+
+		/** @type {Object<string,Object>} Elementor view references (editor only) */
+		this.views = {};
+	}
+
+	/**
+	 * Register a view reference for a widget in the editor.
+	 * @param {string} widgetType
+	 * @param {string} widgetId
+	 * @param {Object} view
+	 */
+	registerView(widgetType, widgetId, view) {
+		const key = `${widgetType}_${widgetId}`;
+		this.views[key] = view;
 	}
 
 	/**
@@ -111,9 +125,20 @@ class WidgetManager {
 	 */
 	updateInstance(widgetType, widgetId, newSettings) {
 		const instanceKey = `${widgetType}_${widgetId}`;
-		if (this.instances[instanceKey]) {
-			this.instances[instanceKey].updateSettings(newSettings);
+		const instance = this.instances[instanceKey];
+
+		// Update the React instance in-place if present and connected.
+		if (
+			instance &&
+			instance.rootElement &&
+			instance.rootElement.isConnected
+		) {
+			instance.updateSettings(newSettings);
+			return;
 		}
+
+		// Otherwise leave initialization to the widget initializer.
+		return;
 	}
 
 	/**
@@ -128,6 +153,7 @@ class WidgetManager {
 	updateModelSetting(widgetType, widgetId, settingName, value) {
 		const modelKey = `${widgetType}_${widgetId}`;
 		const model = this.models[modelKey];
+
 		if (model && model.setSetting) {
 			model.setSetting(settingName, value);
 
@@ -136,7 +162,6 @@ class WidgetManager {
 				elementor.saver.setFlagEditorChange(true);
 			}
 		}
-		
 	}
 
 	/**

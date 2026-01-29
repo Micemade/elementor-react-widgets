@@ -11,6 +11,16 @@ export const isElementorEditor = () => {
 	}
 };
 
+/**
+ * Updates an Elementor widget setting in editor mode by delegating to the widget manager.
+ * This function checks if the ReactElementorWidgets object is available on the window and,
+ * if so, calls its updateModelSetting method to update the specified setting on the widget model.
+ * 
+ * @param {string} widgetType - The type of the widget (e.g., a string identifier for the widget category or class).
+ * @param {string|number} widgetId - The unique identifier of the widget instance.
+ * @param {string} settingName - The name of the setting to update.
+ * @param {*} value - The new value to assign to the setting.
+ */
 export const updateElementorSetting = (
 	widgetType,
 	widgetId,

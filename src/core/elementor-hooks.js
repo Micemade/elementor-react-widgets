@@ -51,8 +51,10 @@ export const registerEditorHooks = () => {
 	elementor.hooks.addFilter(
 		'editor/widget/renderOnChange',
 		function (renderOnChange, widgetType) {
+			// For our registered widgets, allow renderOnChange to be called,
+			// but we'll override the view's renderOnChange to be conditional.
 			if (getRegisteredWidgets().includes(widgetType)) {
-				return false;// Disable automatic DOM re-renders for our widgets
+				return renderOnChange;
 			}
 
 			return renderOnChange;
@@ -67,13 +69,35 @@ export const registerEditorHooks = () => {
 				const widgetId = model.id;
 				const modelKey = `${widgetType}_${widgetId}`;
 				const widgetConfig = getWidgetConfig(widgetType);
-				const getSettingsFromModel = () =>
-					widgetConfig.settingsMapper(model);
+				const getSettingsFromModel = () => widgetConfig.settingsMapper(model);
 
-				// Prevent the editor view from re-rendering the widget DOM.
-				// React will handle updates via state instead of letting Elementor replace the DOM.
-				if (view && typeof view.renderOnChange === 'function') {
-					view.renderOnChange = () => false;
+				// Register the editor view with the widget manager so the
+				// manager can consult it when deciding whether to remount
+				// (for example: core/advanced settings should allow remount).
+				if (view) {
+					try {
+						// Derive widget-owned setting keys from the mapper result
+						const mapped = getSettingsFromModel() || {};
+						const widgetKeys = Object.keys(mapped);
+
+						// Override view.renderOnChange to be conditional:
+						// - For widget-owned changes, skip re-render (React handles it)
+						// - For core/advanced changes, call the original renderOnChange
+						const originalRenderOnChange = view.renderOnChange.bind(view);
+						view.renderOnChange = (settings) => {
+							const changed = settings.changedAttributes();
+							const hasNonWidgetChange = Object.keys(changed).some(k => !widgetKeys.includes(k));
+							if (hasNonWidgetChange) {
+								// Call original to handle core/advanced changes
+								originalRenderOnChange(settings);
+							}
+							// For widget-owned changes, do nothing (React updates in-place)
+						};
+
+						widgetManager.registerView(widgetType, widgetId, view);
+					} catch (e) {
+						// ignore registration errors
+					}
 				}
 
 				// Store getter globally so it's available during widget remounts
@@ -91,7 +115,7 @@ export const registerEditorHooks = () => {
 				);
 
 				// Update React component whenever Elementor model settings change (Elementor → React).
-				model.get('settings').on('change', () => {
+				model.get('settings').on('change', (settingsModel) => {
 					widgetManager.updateInstance(
 						widgetType,
 						widgetId,

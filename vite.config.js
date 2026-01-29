@@ -14,8 +14,12 @@ export default defineConfig({
 			false,
 		outDir: 'assets',
 		emptyOutDir: true,
-		// Ensure CSS is extracted into a separate file
-		cssCodeSplit: true,
+		// Ensure CSS is emitted as a single file so post-build extraction works
+		cssCodeSplit: false,
+		// Watch configuration for `vite build --watch` (rebuild on these file changes)
+		watch: {
+			include: ['src/**/*.{js,ts,jsx,tsx,scss}'],
+		},
 		rollupOptions: {
 			input: path.resolve(__dirname, 'src/main.jsx'),
 			output: {
@@ -24,11 +28,10 @@ export default defineConfig({
 				name: 'ElementorReactWidgets',
 				entryFileNames: 'js/main.js',
 
-				assetFileNames: (chunkInfo) => {
-					const name =
-						(chunkInfo && (chunkInfo.name || chunkInfo.fileName)) ||
-						'';
-					if (name.endsWith('.css')) return 'css/style.css';
+				assetFileNames: (assetInfo) => {
+					const name = (assetInfo && (assetInfo.name || assetInfo.fileName)) || '';
+					const ext = path.extname(name).toLowerCase();
+					if (ext === '.css') return 'css/style.css';
 					return 'assets/[name]-[hash][extname]';
 				},
 			},
