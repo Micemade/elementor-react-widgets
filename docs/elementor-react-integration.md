@@ -133,10 +133,15 @@ When adding a new widget, adapt or create the following files:
 
 ## Resources
 
+- [Author: Micemade Website](https://micemade.com)
 - [Elementor Developer Documentation](https://developers.elementor.com/docs/)
 - [Elementor GitHub Repository](https://github.com/elementor/elementor)
-- [React Developer Documentation](https://reactalt.org/docs/getting-started.html)
-- [Author: Micemade Website](https://micemade.com)
+- [React.dev Learn](https://react.dev/learn)
+- [React Documentation](https://devdocs.io/react/)
+- [Vite build tool](https://vite.dev/)
+- [NodeJS](https://nodejs.org/en)
+- [ESLint](https://eslint.org/)
+- [ESLint VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ---
 
