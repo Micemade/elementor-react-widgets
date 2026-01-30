@@ -2,24 +2,23 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
+// Check if --watch flag is present (used by npm run watch)
+const isWatch = process.argv.includes('--watch');
+
 export default defineConfig({
 	plugins: [react()],
 	root: path.resolve(__dirname),
 	build: {
-		// Enable source maps when VITE_SOURCEMAP env var is set (false by default)
-		// Accept both 'true' and '1' (string) for cross-platform env vars
-		sourcemap:
-			process.env.VITE_SOURCEMAP === 'true' ||
-			process.env.VITE_SOURCEMAP === '1' ||
-			false,
+		// Enable source maps only if explicitly set (e.g., for dev/debugging)
+		sourcemap: true,
 		outDir: 'assets',
 		emptyOutDir: true,
 		// Ensure CSS is emitted as a single file so post-build extraction works
 		cssCodeSplit: false,
-		// Watch configuration for `vite build --watch` (rebuild on these file changes)
-		watch: {
+		// Conditionally enable watch only for npm run watch
+		watch: isWatch ? {
 			include: ['src/**/*.{js,ts,jsx,tsx,scss}'],
-		},
+		} : undefined,
 		rollupOptions: {
 			input: path.resolve(__dirname, 'src/main.jsx'),
 			output: {

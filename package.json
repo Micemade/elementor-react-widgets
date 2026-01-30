@@ -5,9 +5,9 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
+		"build:prod": "vite build --mode production && rm -f assets/js/main.js.map",
 		"watch": "vite build --watch",
 		"postbuild": "node scripts/extract-css.js",
-		"build:sourcemap": "cross-env VITE_SOURCEMAP=true vite build",
 		"preview": "vite preview",
 		"format": "prettier --write ."
 	},

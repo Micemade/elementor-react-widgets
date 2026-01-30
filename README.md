@@ -11,12 +11,13 @@ Features:
 Quickstart:
 
 1. cd into this folder and run `npm install`.
-2. Run `npm run build` or `npm run watch` to produce `assets/` files, or `npm run dev` for local dev server.
-3. Activate the plugin in WordPress and add the "Hello (React) Widget" in Elementor.
+2. Run `npm run build` or `npm run watch` to produce `assets/` files.
+3. Run `npm run build:prod` for optimized build (no sourcemaps)
+4. Run `npm run dev` for local dev server (requires Vite config changes, according to your setup).
+5. Activate the plugin in WordPress and add the "Hello (React) Widget" in Elementor.
 
-Sourcemaps:
 
-- To generate sourcemaps that map back to the original `src/` files, run `npm run build:sourcemap`.
-- This script relies on `cross-env` for cross-platform support (already added as a devDependency), so it works on macOS, Linux, and Windows shells.
+Notes: This plugin is intentionally small — use it as a starting point and copy useful patterns back into your main plugin,
+or build on top of this codebase.
 
-Notes: This is intentionally small — use it as a starting point and copy useful patterns back into your main plugin.
+[Use the documentation in docs/elementor-react-integration.md](https://github.com/Micemade/elementor-react-widgets/blob/main/docs/elementor-react-integration.md)
