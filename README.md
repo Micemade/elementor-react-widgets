@@ -1,6 +1,6 @@
 # Elementor React Widgets — Starter Blueprint
 
-This folder contains a minimal, functional blueprint showing how to integrate React-based widgets with Elementor.
+This repository contains a minimal, functional blueprint showing how to integrate React-based widgets with Elementor.
 
 Features:
 
@@ -21,3 +21,15 @@ Notes: This plugin is intentionally small — use it as a starting point and cop
 or build on top of this codebase.
 
 [Use the documentation in docs/elementor-react-integration.md](https://github.com/Micemade/elementor-react-widgets/blob/main/docs/elementor-react-integration.md)
+
+## Resources
+
+- [Author: Micemade Website](https://micemade.com)
+- [Elementor Developer Documentation](https://developers.elementor.com/docs/)
+- [Elementor GitHub Repository](https://github.com/elementor/elementor)
+- [React.dev Learn](https://react.dev/learn)
+- [React Documentation](https://devdocs.io/react/)
+- [Vite build tool](https://vite.dev/)
+- [NodeJS](https://nodejs.org/en)
+- [ESLint](https://eslint.org/)
+- [ESLint VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
